@@ -29,3 +29,19 @@ Hosted on Ubuntu Server inside VMware and accessible across local network system
 - Analytics dashboard
 - Department routing
 - Technician management
+## Screenshots
+
+### User Console
+![User Console](screenshots/user_console.png)
+
+### Admin Login
+![Admin Login](screenshots/admin_login.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin_dashboard.png)
+
+### Export Reports
+![Export Reports](screenshots/export_report.png)
+
+### Reports Section
+![Reports](screenshots/report.png)
