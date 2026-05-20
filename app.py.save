@@ -1,0 +1,66 @@
+cimport sqlite3
+
+app = Flask(__name__)
+
+# ---- Database setup ----
+def init_db():
+    conn = sqlite3.connect('complaints.db')
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS complaints (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            description TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_db()
+
+# ---- Home page (form) ----
+@app.route('/')
+def home():
+    return render_template_string("""
+        <h2>Complaint System</h2>
+        <form method="POST" action="/submit">
+            <input name="title" placeholder="Issue Title"><br><br>
+            <textarea name="description" placeholder="Describe issue"></textarea><br><br>
+            <button type="submit">Submit</button>
+        </form>
+        <br>
+        <a href="/view">View Complaints</a>
+    """)
+
+# ---- Submit complaint ----
+@app.route('/submit', methods=['POST'])
+def submit():
+    title = request.form['title']
+    description = request.form['description']
+
+    conn = sqlite3.connect('complaints.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO complaints (title, description) VALUES (?,?)",
+              (title, description))
+    conn.commit()
+    conn.close()
+
+    return "Complaint submitted successfully! <a href='/'>Go back</a>"
+
+# ---- View complaints (admin side) ----
+@app.route('/view')
+def view():
+    conn = sqlite3.connect('complaints.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM complaints")
+    data = c.fetchall()
+    conn.close()
+
+    output = "<h2>All Complaints</h2>"
+    for row in data:
+        output += f"<p><b>{row[1]}</b><br>{row[2]}</p><hr>"
+
+    return output
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
