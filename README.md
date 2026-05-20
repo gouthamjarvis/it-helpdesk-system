@@ -32,16 +32,16 @@ Hosted on Ubuntu Server inside VMware and accessible across local network system
 ## Screenshots
 
 ### User Console
-![User Console](screenshots/user_console.png)
+![User Console](user_console.png)
 
 ### Admin Login
-![Admin Login](screenshots/admin_login.png)
+![Admin Login](admin_login.png)
 
 ### Admin Dashboard
-![Admin Dashboard](screenshots/admin_dashboard.png)
+![Admin Dashboard](admin_dashboard.png)
 
 ### Export Reports
-![Export Reports](screenshots/export_report.png)
+![Export Reports](export_report.png)
 
 ### Reports Section
-![Reports](screenshots/report.png)
+![Reports](report.png)
